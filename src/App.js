@@ -15,6 +15,7 @@ const App = () => {
         className="block shadow w-full mx-auto my-2 px-2 py-4 rounded-lg"
         type="text" 
         />
+        <button className="bg-yellow-400 text-3xl px-2 rounded py-1">Add Note</button>
       </form>
     </div>
   );
