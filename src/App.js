@@ -20,7 +20,11 @@ const App = () => {
           Add Note
           </button>
       </form>
+      <div className="grid grid-cols-4 gap-4 py-2">
       <Note title="First Note" content="This is my first Note"/>
+      <Note title="First Note" content="This is my first Note"/>
+      <Note title="First Note" content="This is my first Note"/>
+      </div>
     </div>
   );
 };
