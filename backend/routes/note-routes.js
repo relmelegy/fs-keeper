@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
             res.status(200).json(results);
         })
         .catch((err) => {
-            console.error('Error fetching notes:', err);
-            res.status(500).json({ error: 'Failed to fetch notes' });
+            console.log(err);
+            res.status(500).json({ error: err });
         });
 });
 
@@ -34,8 +34,8 @@ router.post('/', (req, res) => {
             });
         })
         .catch((err) => {
-            console.error('Error creating note:', err);
-            res.status(500).json({ error: 'Failed to create note' });
+            console.log(err);
+            res.status(500).json({ error: err });
         });
 });
 
@@ -48,8 +48,8 @@ router.patch('/:id', (req, res) => {
             res.status(200).json({ message: 'Note updated successfully', result });
         })
         .catch((err) => {
-            console.error('Error updating note:', err);
-            res.status(500).json({ error: 'Failed to update note' });
+            console.log(err);
+            res.status(500).json({ error: err });
         });
 });
 
@@ -63,8 +63,8 @@ router.delete('/:id', (req, res) => {
             res.status(200).json({ message: 'Note deleted successfully', result });
         })
         .catch((err) => {
-            console.error('Error deleting note:', err);
-            res.status(500).json({ error: 'Failed to delete note' });
+            console.log(err);
+            res.status(500).json({ error: err });
         });
 });
 
