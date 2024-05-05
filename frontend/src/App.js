@@ -1,7 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import Note from './components/note';
 
 const App = () => {
+  const [notes, setNotes] = useState();
+
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    axios
+    .get('http://localhost:5001/notes')
+    .then((res) => {
+      setNotes(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  });
+
+  const deleteNote = (id) => {
+    console.log('Delete note function called');
+  };
+
+  const updateNote = (id, updatedTitle, updatedContent) => {
+    console.log('Update note function called');
+  };
+
   return(
     <div>
       <h1 className="bg-yellow-400 w-screen text-xl font-medium py-4 mx-auto text-center">
@@ -21,9 +46,16 @@ const App = () => {
           </button>
       </form>
       <div className="grid grid-cols-4 gap-4 py-2">
-      <Note title="First Note" content="This is my first Note"/>
-      <Note title="First Note" content="This is my first Note"/>
-      <Note title="First Note" content="This is my first Note"/>
+      {
+        notes && notes.map(note => (
+          <Note 
+          key={note._id} 
+          title={note.title} 
+          content={note.content} 
+          delete = {() => deleteNote(note._id)} 
+          updateNote={updateNote} />
+        ))
+      }
       </div>
     </div>
   );
