@@ -4,11 +4,14 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
 
+console.log(process.env.TEST);
+
+
 const noteRoutes = require('./routes/note-routes');
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(process.env.MONGO_DB_URI);
 
 app.use(cors());
 app.use(express.json());
@@ -23,4 +26,4 @@ app.listen(5001, () => {
     console.log('Server is running on port 5001');
 });
 
-module.exports = app;
+// module.exports = app;
