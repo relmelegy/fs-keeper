@@ -1,0 +1,21 @@
+[debug] [2024-05-06T06:16:45.027Z] ----------------------------------------------------------------------
+[debug] [2024-05-06T06:16:45.031Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-05-06T06:16:45.031Z] CLI Version:   13.8.0
+[debug] [2024-05-06T06:16:45.032Z] Platform:      darwin
+[debug] [2024-05-06T06:16:45.033Z] Node Version:  v20.11.1
+[debug] [2024-05-06T06:16:45.034Z] Time:          Mon May 06 2024 02:16:45 GMT-0400 (Eastern Daylight Time)
+[debug] [2024-05-06T06:16:45.034Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-05-06T06:16:45.045Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-05-06T06:16:45.046Z] > authorizing via signed-in user (rod.e9191@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/raaide/Library/CloudStorage/GoogleDrive-re2473@columbia.edu/My Drive/Spring24/Full-Stack Dev/Final/frontend
+
