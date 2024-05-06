@@ -19,12 +19,34 @@ const App = () => {
     });
   });
 
+  const addNote = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:5001/notes', { title, content }).then(res => {
+      console.log(res.data);
+      setNotes([...notes, res.data]).catch(err => console.log(err));
+    });
+  };
+
   const deleteNote = (id) => {
-    console.log('Delete note function called');
+    axios.delete(`http://localhost:5001/notes/${id}`).then((res) => {
+      console.log(res.data);
+      setNotes(notes.filter((note) => note._id !== id));
+    });
   };
 
   const updateNote = (id, updatedTitle, updatedContent) => {
-    console.log('Update note function called');
+    axios.patch(`http://localhost:5001/notes/${id}`, {
+      title: updatedTitle,
+      content: updatedContent
+    })
+    .then( (res) => {
+      console.log(res.data);
+      const updatedNotes = notes.map((note) => note._id === id 
+      ? { ...note, title: updatedTitle, content: updatedContent }
+    : note
+  );
+  setNotes(updatedNotes);
+  }).catch((err) => console.log(err));
   };
 
   return(
@@ -32,16 +54,24 @@ const App = () => {
       <h1 className="bg-yellow-400 w-screen text-xl font-medium py-4 mx-auto text-center">
         Notes Keeper
       </h1>
-      <form className="py-2 shadow-xl rounded-lg px-5 w-1/3 mx-auto text-left mt-10">
+      <form 
+      onSubmit={addNote}
+      className="py-2 shadow-xl rounded-lg px-5 w-1/3 mx-auto text-left mt-10">
         <input 
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         className= "block shadow w-full mx-auto px-2 py-2 rounded-lg"
         type="text" 
         />
         <textarea 
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         className="block shadow w-full mx-auto my-2 px-2 py-4 rounded-lg"
         type="text" 
         />
-        <button className="bg-yellow-400 text-2xl px-2 rounded py-1">
+        <button
+        type='submit'
+        className="bg-yellow-400 text-2xl px-2 rounded py-1">
           Add Note
           </button>
       </form>
@@ -49,11 +79,13 @@ const App = () => {
       {
         notes && notes.map(note => (
           <Note 
-          key={note._id} 
+          key={note._id}
+          id={note._id} 
           title={note.title} 
           content={note.content} 
           delete = {() => deleteNote(note._id)} 
-          updateNote={updateNote} />
+          updateNote={updateNote} 
+          />
         ))
       }
       </div>
