@@ -33,7 +33,7 @@ const Note = (props) => {
                     <button 
                         onClick={handleUpdate} 
                         className="bg-blue-400 text-xl text-white px-2 py-1">
-                        Edit
+                        Submit
                         </button>
                     </div>
                 ) : (
@@ -46,7 +46,10 @@ const Note = (props) => {
                     } className="py-1 my-2 px-3 bg-blue-400 text-xl text-white rounded-lg mx-2">
                         Edit
                     </button>
-                    <button className="py-1 my-2 px-3 bg-red-600 text-xl text-white rounded-lg mx-2">
+                    <button 
+                    className="py-1 my-2 px-3 bg-red-600 text-xl text-white rounded-lg mx-2"
+                    onClick={props.delete}
+                    >
                         Delete
                     </button>
                 </div>
