@@ -23,8 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # Ignore node_modules and .cache folders
-frontend/node_modules
-frontend/node_modules/.cache
-
-# Ignore node_modules and cache
 frontend/node_modules/.cache
