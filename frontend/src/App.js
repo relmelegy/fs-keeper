@@ -1,85 +1,87 @@
-import React, {useState, useEffect} from 'react';
+// frontend/src/app.js
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Note from './components/note';
 import { auth } from './components/firebase';
 import GoogleSignIn from './components/GoogleSignIn';
 import SignOut from './components/SignOut';
 
-
-
 const App = () => {
-  // const [notes, setNotes] = useState();
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Listen for changes in authentication state
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
     });
-
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    // Fetch notes when user is authenticated
-    if (user) {
-      axios
-        .get('http://localhost:5001/notes')
-        .then((res) => {
-          console.log(res);
-          setNotes(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
+  const fetchNotes = async () => {
+    try {
+      if (user) {
+        const idToken = await auth.currentUser.getIdToken();
+        const res = await axios.get('http://localhost:5001/notes', {
+          headers: {
+            Authorization: `Bearer ${idToken}`
+          }
         });
+        setNotes(res.data);
+      }
+    } catch (error) {
+      console.error('Error fetching notes:', error);
     }
+  };
+
+  useEffect(() => {
+    fetchNotes();
   }, [user]);
 
-  const addNote = (e) => {
+  const addNote = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5001/notes', { title, content })
-      .then(res => {
-        console.log(res.data);
-        // Update the list of notes by fetching them again
-        axios.get('http://localhost:5001/notes')
-          .then((res) => {
-            console.log(res);
-            setNotes(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        setTitle(''); // Clear input fields after successful submission
-        setContent(''); // Clear input fields after successful submission
-      })
-      .catch(err => console.log(err));
+    try {
+      const idToken = await auth.currentUser.getIdToken();
+      const res = await axios.post(
+        'http://localhost:5001/notes',
+        { title, content },
+        { headers: { Authorization: `Bearer ${idToken}` } }
+      );
+      setNotes([...notes, res.data]);
+      setTitle('');
+      setContent('');
+    } catch (error) {
+      console.error('Error adding note:', error);
+    }
   };
-  
 
-  const deleteNote = (id) => {
-    axios.delete(`http://localhost:5001/notes/${id}`)
-    .then((res) => {
-      console.log(res.data);
+  const deleteNote = async (id) => {
+    try {
+      const idToken = await auth.currentUser.getIdToken();
+      await axios.delete(`http://localhost:5001/notes/${id}`, {
+        headers: { Authorization: `Bearer ${idToken}` }
+      });
       setNotes(notes.filter((note) => note._id !== id));
-    });
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
   };
 
-  const updateNote = (id, updatedTitle, updatedContent) => {
-    axios.patch(`http://localhost:5001/notes/${id}`, {
-      title: updatedTitle,
-      content: updatedContent
-    })
-    .then( (res) => {
-      console.log(res.data);
-      const updatedNotes = notes.map((note) => note._id === id 
-      ? { ...note, title: updatedTitle, content: updatedContent }
-    : note
-  );
-  setNotes(updatedNotes);
-  }).catch((err) => console.log(err));
+  const updateNote = async (id, updatedTitle, updatedContent) => {
+    try {
+      const idToken = await auth.currentUser.getIdToken();
+      const res = await axios.patch(
+        `http://localhost:5001/notes/${id}`,
+        { title: updatedTitle, content: updatedContent },
+        { headers: { Authorization: `Bearer ${idToken}` } }
+      );
+      setNotes(
+        notes.map((note) => (note._id === id ? res.data : note))
+      );
+    } catch (error) {
+      console.error('Error updating note:', error);
+    }
   };
 
   return (
@@ -94,16 +96,16 @@ const App = () => {
               onChange={(e) => setTitle(e.target.value)}
               className="block shadow w-full mx-auto px-2 py-2 rounded-lg"
               type="text"
+              placeholder="Note Title"
             />
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               className="block shadow w-full mx-auto my-2 px-2 py-4 rounded-lg"
               type="text"
+              placeholder="Note Content"
             />
-            <button type="submit" className="bg-yellow-400 text-2xl px-2 rounded py-1">
-              Add Note
-            </button>
+            <button type="submit" className="bg-yellow-400 text-2xl px-2 rounded py-1">Add Note</button>
           </form>
           {notes && notes.length > 0 && (
             <div className="grid grid-cols-4 gap-4 py-2">
