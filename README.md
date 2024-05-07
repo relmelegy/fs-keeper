@@ -1,70 +1,224 @@
-# Getting Started with Create React App
+Here's a comprehensive `README.md` file for your web app:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```md
+# Notes Keeper Web App
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+**Notes Keeper** is a web application designed for taking and managing personal notes. The application leverages Firebase Authentication for user management and MongoDB for data storage. It includes a backend powered by Node.js/Express and a frontend built with React.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User Authentication**: Sign in with Google using Firebase.
+- **CRUD Operations**: Create, read, update, and delete notes.
+- **Notes Management**: Keep your notes organized and access them anywhere.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+### Frontend
+- **React**: Library for building the user interface.
+- **Axios**: HTTP client for making API requests.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **Firebase**: Firebase Authentication SDK.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend
+- **Node.js & Express**: Server and web framework.
+- **MongoDB & Mongoose**: NoSQL database and ODM.
+- **Firebase Admin SDK**: For verifying user tokens.
 
-### `npm run build`
+## Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Node.js**: Version 14 or higher.
+- **MongoDB**: Local or hosted instance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Clone the Repository
 
-### `npm run eject`
+```bash
+git clone https://github.com/relmelegy/fs-keeper.git
+cd fs-keeper
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Install Backend Dependencies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Navigate to the backend folder:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+cd backend
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Install dependencies:
 
-## Learn More
+```bash
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Install Frontend Dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Navigate to the frontend folder:
 
-### Code Splitting
+```bash
+cd ../frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install dependencies:
 
-### Analyzing the Bundle Size
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Configuration
 
-### Making a Progressive Web App
+### Backend Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Create a `.env` file inside the `backend` directory and configure the following variables:
 
-### Advanced Configuration
+```env
+MONGO_DB_URI=<Your MongoDB Connection String>
+FIREBASE_SERVICE_ACCOUNT_KEY=./fs-keeper-firebase-adminsdk-tozd4-b5b5e921ce.json
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. Add the Firebase Admin SDK Service Account JSON file to the `backend/config` folder.
 
-### Deployment
+### Frontend Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Navigate to the `frontend` directory.
+2. Create a `.env` file inside the `frontend` directory and add your Firebase configuration:
 
-### `npm run build` fails to minify
+```env
+REACT_APP_FIREBASE_API_KEY=<Your Firebase API Key>
+REACT_APP_FIREBASE_AUTH_DOMAIN=<Your Firebase Auth Domain>
+REACT_APP_FIREBASE_PROJECT_ID=<Your Firebase Project ID>
+REACT_APP_FIREBASE_STORAGE_BUCKET=<Your Firebase Storage Bucket>
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=<Your Firebase Messaging Sender ID>
+REACT_APP_FIREBASE_APP_ID=<Your Firebase App ID>
+REACT_APP_FIREBASE_MEASUREMENT_ID=<Your Firebase Measurement ID>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Usage
+
+### Running Backend
+
+1. Navigate to the `backend` directory:
+
+```bash
+cd backend
+```
+
+2. Start the server:
+
+```bash
+npm start
+```
+
+The backend server will start on `http://localhost:5001`.
+
+### Running Frontend
+
+1. Navigate to the `frontend` directory:
+
+```bash
+cd frontend
+```
+
+2. Start the React development server:
+
+```bash
+npm start
+```
+
+The frontend server will start on `http://localhost:3000`.
+
+### Simultaneous Running (Optional)
+
+You can run both the backend and frontend servers simultaneously using `concurrently`.
+
+1. Install `concurrently` globally:
+
+```bash
+npm install -g concurrently
+```
+
+2. Create a `package.json` file in the root directory (above both `frontend` and `backend` folders):
+
+```json
+{
+  "name": "fullstack-project",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\""
+  }
+}
+```
+
+3. Run the servers:
+
+```bash
+npm start
+```
+
+## API Endpoints
+
+### Notes API
+
+- **Get All Notes (GET)**
+
+  ```http
+  GET /notes
+  ```
+
+- **Create a Note (POST)**
+
+  ```http
+  POST /notes
+  ```
+
+  **Request Body**:
+
+  ```json
+  {
+    "title": "My New Note",
+    "content": "Note content goes here"
+  }
+  ```
+
+- **Update a Note (PATCH)**
+
+  ```http
+  PATCH /notes/:id
+  ```
+
+  **Request Body**:
+
+  ```json
+  {
+    "title": "Updated Note Title",
+    "content": "Updated note content"
+  }
+  ```
+
+- **Delete a Note (DELETE)**
+
+  ```http
+  DELETE /notes/:id
+  ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- **Firebase** for authentication
+- **MongoDB** for data storage
+- **Tailwind CSS** for styling
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any changes.
+
+## Authors
+
+- **Raaid Elmelegy** - [relmelegy](https://github.com/relmelegy)
+```
