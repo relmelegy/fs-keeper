@@ -1,5 +1,7 @@
 # Notes Keeper Web App
 
+[![Vercel](https://vercelbadge.vercel.app/api/relmelegy/fs-keeper)](https://frontend-8sfb6ehuf-relmelegys-projects.vercel.app)
+
 ## Overview
 
 **Notes Keeper** is a web application designed for taking and managing personal notes. The application leverages Firebase Authentication for user management and MongoDB for data storage. It includes a backend powered by Node.js/Express and a frontend built with React.
