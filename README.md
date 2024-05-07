@@ -1,6 +1,3 @@
-Here's a comprehensive `README.md` file for your web app:
-
-```md
 # Notes Keeper Web App
 
 ## Overview
@@ -38,7 +35,7 @@ Here's a comprehensive `README.md` file for your web app:
 ```bash
 git clone https://github.com/relmelegy/fs-keeper.git
 cd fs-keeper
-```
+
 
 ### Install Backend Dependencies
 
