@@ -69,7 +69,11 @@ const allowedOrigins = [
   'https://frontend-relmelegys-projects.vercel.app',
   'https://frontend-iota-ivory.vercel.app',
   'https://frontend-oz8y68tf4-relmelegys-projects.vercel.app',
-  'https://frontend-8sfb6ehuf-relmelegys-projects.vercel.app'
+  'https://frontend-8sfb6ehuf-relmelegys-projects.vercel.app',
+  'https://fs-keeper-git-main-relmelegys-projects.vercel.app/',
+  'fs-keeper-fp9s9oj9d-relmelegys-projects.vercel.app',
+  'fs-keeper.vercel.app',
+  'fs-keeper-fp9s9oj9d-relmelegys-projects.vercel.app'
 ];
 
 app.use(cors({
