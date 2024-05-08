@@ -1,7 +1,7 @@
 # Notes Keeper Web App
 
 
-[![Vercel](https://vercelbadge.vercel.app/api/relmelegy/fs-keeper)](https://frontend-oz8y6oy8tf4-relmelegys-projects.vercel.app/)
+[![Vercel](https://vercelbadge.vercel.app/api/relmelegy/fs-keeper)](https://fs-keeper.vercel.app/)
 
 ## Overview
 
