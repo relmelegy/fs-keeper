@@ -254,7 +254,7 @@ const App = () => {
             </button>
           </form>
           {notes && notes.length > 0 && (
-            <div className="grid grid-cols-4 gap-4 py-2">
+            <div className="grid grid-cols-4 gap-4 py-2 justify-center px-6 mt-6">
               {notes.map((note) => (
                 <Note
                   key={note._id}
