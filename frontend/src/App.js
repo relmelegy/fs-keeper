@@ -144,8 +144,7 @@ import { auth } from './components/firebase';
 import GoogleSignIn from './components/GoogleSignIn';
 import SignOut from './components/SignOut';
 
-const BACKEND_URL = 'https://fs-keeper.onrender.com';
-
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
