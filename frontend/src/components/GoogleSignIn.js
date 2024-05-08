@@ -1,30 +1,27 @@
-// frontend/src/components/GoogleSignIn.js
-import React, { useState } from 'react';
+import React from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const GoogleSignInButton = () => {
-  const [error, setError] = useState(null);
-
   const handleSignInWithGoogle = () => {
     const auth = getAuth();
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log('Sign-in successful', result.user);
-        setError(null);
       })
       .catch((error) => {
         console.error('Sign-in error', error);
-        setError('Sign-in failed. Please try again.');
       });
   };
 
   return (
-    <div>
-      <button onClick={handleSignInWithGoogle} className="bg-blue-500 text-white py-2 px-4 rounded">
+    <div className="absolute top-4 right-8">
+      <button
+        onClick={handleSignInWithGoogle}
+        className="bg-blue-600 text-xl text-white px-4 py-2 rounded-lg"
+      >
         Sign in with Google
       </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 };

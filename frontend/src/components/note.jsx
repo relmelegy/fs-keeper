@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const Note = ({ id, title, content, delete: deleteNote, updateNote }) => {
+const Note = (props) => {
   const [editMode, setEditMode] = useState(false);
-  const [updatedTitle, setUpdatedTitle] = useState(title);
-  const [updatedContent, setUpdatedContent] = useState(content);
+  const [updatedTitle, setUpdatedTitle] = useState(props.title);
+  const [updatedContent, setUpdatedContent] = useState(props.content);
 
   const handleUpdate = () => {
-    updateNote(id, updatedTitle, updatedContent);
+    props.updateNote(props.id, updatedTitle, updatedContent);
     setEditMode(false);
   };
 
   return (
-    <div className="border-2 px-5 py-2 w-full my-10">
+    <div className="border-2 px-5 py-4 w-full shadow-lg rounded-lg bg-white">
       {editMode ? (
         <div>
           <input
@@ -28,15 +28,20 @@ const Note = ({ id, title, content, delete: deleteNote, updateNote }) => {
             type="text"
             className="block shadow w-full mx-auto my-2 px-2 py-4 rounded-lg"
           />
-          <button onClick={handleUpdate} className="bg-blue-400 text-xl text-white px-2 py-1">
+          <button
+            onClick={handleUpdate}
+            className="bg-blue-400 text-xl text-white px-2 py-1 mt-2 rounded-lg"
+          >
             Submit
           </button>
         </div>
       ) : (
         <div>
-          <h1 className="flex justify-center items-center py-2 text-xl font-bold">{title}</h1>
-          <h2 className="text-justify">{content}</h2>
-          <div className="flex justify-center items-center">
+          <h1 className="flex justify-center items-center py-2 text-xl font-bold">{props.title}</h1>
+          <div className="bg-gray-100 px-4 py-4 my-2 rounded-lg shadow-inner">
+            <p className="text-justify">{props.content}</p>
+          </div>
+          <div className="flex justify-center items-center mt-4">
             <button
               onClick={() => setEditMode(true)}
               className="py-1 my-2 px-3 bg-blue-400 text-xl text-white rounded-lg mx-2"
@@ -44,7 +49,7 @@ const Note = ({ id, title, content, delete: deleteNote, updateNote }) => {
               Edit
             </button>
             <button
-              onClick={deleteNote}
+              onClick={props.delete}
               className="py-1 my-2 px-3 bg-red-600 text-xl text-white rounded-lg mx-2"
             >
               Delete
