@@ -1,5 +1,7 @@
 const firebaseAdmin = require('firebase-admin');
-const serviceAccount = require('./fs-keeper-firebase-adminsdk-tozd4-2162000bf4.json');
+// const serviceAccount = require('./fs-keeper-firebase-adminsdk-tozd4-2162000bf4.json');
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+
 
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
