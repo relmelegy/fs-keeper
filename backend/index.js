@@ -71,23 +71,24 @@ const allowedOrigins = [
   'https://frontend-oz8y68tf4-relmelegys-projects.vercel.app',
   'https://frontend-8sfb6ehuf-relmelegys-projects.vercel.app',
   'https://fs-keeper-git-main-relmelegys-projects.vercel.app/',
-  'fs-keeper.vercel.app',
-  'fs-keeper-fp9s9oj9d-relmelegys-projects.vercel.app',
-  'fs-keeper-relmelegys-projects.vercel.app'
+  'https://fs-keeper.vercel.app',
+  'https://fs-keeper-fp9s9oj9d-relmelegys-projects.vercel.app',
+  'https://fs-keeper-relmelegys-projects.vercel.app'
 ];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, etc.)
+const corsOptions = {
+  origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true // Enable cookies to be included in CORS requests
-}));
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Authorization', 'Content-Type']
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/notes', noteRoutes);
 
