@@ -11,7 +11,7 @@ const Note = (props) => {
   };
 
   return (
-    <div className="border-2 px-5 py-4 w-full shadow-lg rounded-lg bg-white">
+    <div className="border-1 px-2 py-1 w-full shadow-lg rounded-lg bg-white">
       {editMode ? (
         <div>
           <input
@@ -38,8 +38,8 @@ const Note = (props) => {
       ) : (
         <div>
           <h1 className="flex justify-center items-center py-2 text-xl font-bold">{props.title}</h1>
-          <div className="bg-gray-100 px-4 py-4 my-2 rounded-lg shadow-inner">
-            <p className="text-justify">{props.content}</p>
+          <div className="bg-gray-100 px-12 py-12 my-2 rounded-lg shadow-inner">
+            <p className="text-justify whitespace-pre-wrap">{props.content}</p>
           </div>
           <div className="flex justify-center items-center mt-4">
             <button
