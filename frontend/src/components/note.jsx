@@ -38,7 +38,7 @@ const Note = (props) => {
       ) : (
         <div>
           <h1 className="flex justify-center items-center py-2 text-xl font-bold">{props.title}</h1>
-          <div className="bg-gray-100 px-12 py-12 my-2 rounded-lg shadow-inner">
+          <div className="bg-white px-12 py-12 my-2 rounded-lg shadow-inner"> 
             <p className="text-justify whitespace-pre-wrap">{props.content}</p>
           </div>
           <div className="flex justify-center items-center mt-4">
